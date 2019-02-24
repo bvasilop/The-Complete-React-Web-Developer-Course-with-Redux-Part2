@@ -35,8 +35,6 @@ const { name: publisherName = 'Self-Published' } = book.publisher;
 
 console.log(publisherName); // Penguin, Self-Published
 
-
-
 // Array Destructuring
 
 const address = ['1299 South Juniper Street', 'Philadelphia', 'Pennsylvania', '19147'];
