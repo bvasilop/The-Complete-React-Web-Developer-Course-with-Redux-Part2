@@ -1,5 +1,4 @@
 
-
 {
 		"parser": "babel-eslint",
 		"extends": "airbnb",
@@ -24,18 +23,11 @@
     "rules": {
 				"indent": [true, "tabs", 2],
 			"react/jsx-indent": "off",
-			"react/jsx-indent-props": "off"
+			"react/jsx-indent-props": "off",
       "comma-dangle": [
         "error",
         "never"
 			],
-
-
-
-
-
-
-
       "no-unused-vars": [
         "error",
         {
@@ -43,8 +35,6 @@
           "args": "none"
         }
       ],
-
         "react/jsx-filename-extension": 0
-
     }
 }
