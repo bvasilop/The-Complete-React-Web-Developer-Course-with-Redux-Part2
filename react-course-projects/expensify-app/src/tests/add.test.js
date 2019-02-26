@@ -8,8 +8,8 @@ test('should add two numbers', () => {
 });
 
 test (`Should generate greeting from name`, () => {
-	const resultName = generateGreeting('Bill');
-	expect(resultName).toBe('Hello Bill!');
+	const resultName = generateGreeting('Theo');
+	expect(resultName).toBe('Hello Theo!');
 });
 
 test('should generate greeting for no name', () => {

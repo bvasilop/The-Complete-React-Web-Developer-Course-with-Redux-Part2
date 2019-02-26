@@ -5,5 +5,8 @@
 
 [Final Code for Expensify App](https://github.com/andrewjmead/react-course-2-expensify-app)
 
+## Yarn Dev Server
+  *yarn run dev-server*
+
 ## Testing with Jest
  *yarn test -- --watch*
