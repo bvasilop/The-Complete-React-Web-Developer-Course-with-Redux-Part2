@@ -4,3 +4,6 @@
 [Course Notes](https://github.com/rossyp44Y/notesReactCourse)
 
 [Final Code for Expensify App](https://github.com/andrewjmead/react-course-2-expensify-app)
+
+## Testing with Jest
+ *yarn test -- --watch*
