@@ -48,7 +48,3 @@ expect(sortByDate()).toEqual({ type: 'SORT_BY_DATE' });
 test('should generate sort by amount action object', () => {
 	expect(sortByAmount()).toEqual({ type: 'SORT_BY_AMOUNT' });
 });
-
-
-
-
