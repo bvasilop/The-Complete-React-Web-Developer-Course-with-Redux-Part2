@@ -1,0 +1,13 @@
+.footer {
+  margin-top: 3rem;
+  @media (min-width: 22rem) {
+      font-size: .85rem;
+
+      p {
+          color: #fafafa;
+          margin-bottom: 0;
+      }
+
+  }
+
+}

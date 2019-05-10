@@ -1,0 +1,29 @@
+.header {
+    padding: 1rem 0 3rem;
+}
+.title {
+    color:red;
+    font-size: 4rem;
+    text-decoration: none;
+    // @media (min-width: 22rem) {
+    //     font-size: 1.95rem;
+    // }
+}
+.navList {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+}
+.navItem {
+    color: #4e4e4e;
+    font-size: 2rem;
+    margin-right: 1.3rem;
+    text-decoration: none;
+}
+.navItem:hover {
+    color: #282828;
+}
+.activeNavItem {
+    color: #333333;
+    font-weight: bold;
+}
