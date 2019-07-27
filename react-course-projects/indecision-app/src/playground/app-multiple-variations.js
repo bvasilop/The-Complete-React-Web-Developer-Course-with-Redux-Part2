@@ -4,12 +4,12 @@
 // component state allows our components to manage data.
 // just think about an object with various key value pairs and when that data changes the component will automatically render to reflect those changes.
 // taking a method, passing it down into a child component and having it called down there.
-// That allows us to reverse the data flow. (allows child to communicate wit parent)
+// That allows us to reverse the data flow. (allows child to communicate with parent)
 
 // stateless - functional - component (presentational components)(function based components)
 // life cycle methods only available through class based components
 
-// using localstorage and life cycle methods (keyvalue pair store) ---only works with string data
+// using localstorage and life cycle methods (key value pair store) ---only works with string data
 	// localStorage.setItem('name', 'Bill');
 	// localStorage.getItem('name'); // name Bill
 	// localStorage.removeItem('name');
