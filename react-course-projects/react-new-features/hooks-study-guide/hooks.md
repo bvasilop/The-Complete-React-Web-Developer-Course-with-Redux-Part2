@@ -17,7 +17,7 @@
   - State doesn't need to be an object with `useState`.
   - When you are using `useState` and you update the `state`, it completely replaces what was there before as opposed to how state worked in the past with objects where the data was merged.
 
-## React Hooks Counter Example
+## React Hooks Counter Example using `useState`
 
 ```jsx
 import React, { useState } from 'react';
@@ -124,7 +124,7 @@ App.defaultProps = {
 export default App;
 ```
 
-## Using Complex State with useState for forms
+## Using Complex State with useState using array data
 
 ```jsx
 import React, { useState } from 'react';
@@ -134,6 +134,163 @@ const NoteApp = () => {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+
+  const addNote = e => {
+    e.preventDefault();
+    setNotes([...notes, { title, body }]);
+    setTitle('');
+    setBody('');
+  };
+
+  const removeNote = title => {
+    setNotes(notes.filter(note => note.title !== title));
+  };
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      {notes.map(note => (
+        <div key={note.title}>
+          <h3>{note.title}</h3>
+          <p>{note.body}</p>
+          <button onClick={() => removeNote(note.title)}>remove</button>
+        </div>
+      ))}
+      <p>Add note</p>
+      <form onSubmit={addNote}>
+        <input
+          value={title}
+          placeholder="title"
+          onChange={e => setTitle(e.target.value)}
+        />
+        <br />
+        <br />
+        <textarea
+          value={body}
+          placeholder="body"
+          onChange={e => setBody(e.target.value)}
+        />
+        <button>add note</button>
+      </form>
+    </div>
+  );
+};
+
+export default NoteApp;
+```
+
+## `useEffect` Hooks
+
+- This function is similar to a combination of `componentDidMount` and `componentDidUpdate` lifecycle methods.
+- `useState` allows us to do something inside of functional components that we were not able to do before.
+- Managing component's state `useEffect` is similar because it allows us to do something in functional components that we previously were not able to do.
+- This is kind of like a replacement for lifecycle methods in our class based components.
+- So think about methods like `componentDidMount` `componentDidUpdate` or `componentDidUnbound`.
+
+### Using `useEffect` with `localStorage`
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import './App.css';
+
+const NoteApp = () => {
+  const notesData = JSON.parse(localStorage.getItem('notes')); // using localStorage to save data
+
+  const [notes, setNotes] = useState(notesData || []);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  });
+
+  const addNote = e => {
+    e.preventDefault();
+    setNotes([...notes, { title, body }]);
+    setTitle('');
+    setBody('');
+  };
+
+  const removeNote = title => {
+    setNotes(notes.filter(note => note.title !== title));
+  };
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      {notes.map(note => (
+        <div key={note.title}>
+          <h3>{note.title}</h3>
+          <p>{note.body}</p>
+          <button onClick={() => removeNote(note.title)}>remove</button>
+        </div>
+      ))}
+      <p>Add note</p>
+      <form onSubmit={addNote}>
+        <input
+          value={title}
+          placeholder="title"
+          onChange={e => setTitle(e.target.value)}
+        />
+        <br />
+        <br />
+        <textarea
+          value={body}
+          placeholder="body"
+          onChange={e => setBody(e.target.value)}
+        />
+        <button>add note</button>
+      </form>
+    </div>
+  );
+};
+
+export default NoteApp;
+```
+
+### Using `useEffect` to conditionally fire an effect
+
+```jsx
+useEffect(() => {
+  // this is similar to component did mount and component did update it's going to run once right away
+  console.log('useEffect ran');
+  document.title = count;
+}, [count]); // will run as many times as the count is updated
+
+useEffect(() => {
+  console.log('this should only run once!');
+}, []); // will only run once because the second arg is an empty array
+```
+
+- Using `useEffect` in this way is an exact mirror of `componentDidMount`
+- By specifying that array as the second argument we can create effects that only run when they need to
+- We can use the use effect hook as many times as we'd like to in a functional component.
+- In traditional class based components, we had a single place to setup `componentDidMount`. We defined that method and everything that needed to happen when your component mounted needed to go
+  inside of there.
+- We can call `useEffect` multiple times for each specific feature. Each can have their own set of dependencies keeping your app easy to maintain and really quick.
+- Working with `useEffect` allows us to run some code and now we know how to use its dependencies argument to conditionally run an effect.
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import './App.css';
+
+const NoteApp = () => {
+  const [notes, setNotes] = useState([]);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
+  useEffect(() => {
+    const notesData = JSON.parse(localStorage.getItem('notes'));
+
+    if (notesData) {
+      setNotes(notesData);
+    }
+  }, []);
+
+  useEffect(() => {
+    // used in place of lifecycle methods
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }, [notes]);
 
   const addNote = e => {
     e.preventDefault();
