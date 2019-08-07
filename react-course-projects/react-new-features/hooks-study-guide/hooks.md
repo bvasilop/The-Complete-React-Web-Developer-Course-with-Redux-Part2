@@ -335,3 +335,65 @@ const NoteApp = () => {
 
 export default NoteApp;
 ```
+
+### Using `useEffect` in place of `componentDidUnmount`
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import './App.css';
+
+const NoteApp = () => {
+  const notesData = JSON.parse(localStorage.getItem('notes')); // using localStorage to save data
+
+  const [notes, setNotes] = useState(notesData || []);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
+  useEffect(() => {
+    // used in place of lifecycle methods
+    localStorage.setItem('notes', JSON.stringify(notes));
+  });
+
+  const addNote = e => {
+    e.preventDefault();
+    setNotes([...notes, { title, body }]);
+    setTitle('');
+    setBody('');
+  };
+
+  const removeNote = title => {
+    setNotes(notes.filter(note => note.title !== title));
+  };
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      {notes.map(note => (
+        <div key={note.title}>
+          <h3>{note.title}</h3>
+          <p>{note.body}</p>
+          <button onClick={() => removeNote(note.title)}>remove</button>
+        </div>
+      ))}
+      <p>Add note</p>
+      <form onSubmit={addNote}>
+        <input
+          value={title}
+          placeholder="title"
+          onChange={e => setTitle(e.target.value)}
+        />
+        <br />
+        <br />
+        <textarea
+          value={body}
+          placeholder="body"
+          onChange={e => setBody(e.target.value)}
+        />
+        <button>add note</button>
+      </form>
+    </div>
+  );
+};
+
+export default NoteApp;
+```
